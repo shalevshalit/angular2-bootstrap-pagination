@@ -8,11 +8,11 @@ import {NgModel, ControlValueAccessor} from "@angular/forms";
   template:`
               <ul class="pagination" >
                   <li *ngIf="previousItemValid && firstText" (click)="firstPage()"><a href="#" [innerHTML]="firstText">First</a></li>
-                  <li> <a *ngIf="previousItemValid" (click)="previousPage(nextItem)" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a> </li>
+                  <li><a *ngIf="previousItemValid" (click)="previousPage(previousItem)" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a> </li>
                   <li *ngFor="let pageNo of pageList" [ngClass]="{'active':seletedPage === pageNo}">
                       <a (click)="setCurrentPage(pageNo)">{{pageNo}}</a>
                   </li>                
-                  <li> <a  *ngIf="nextItemValid" (click)="nextPage(nextItem)" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a> </li>
+                  <li><a *ngIf="nextItemValid" (click)="nextPage(nextItem)" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a> </li>
                   <li><a *ngIf="nextItemValid && lastText" (click)="lastPage()" [innerHTML]="lastText" >Last</a></li>
                 </ul>
 
@@ -33,10 +33,10 @@ export class PaginationDirective implements ControlValueAccessor, OnInit{
   private onChange: Function;
   private onTouched: Function;
   private seletedPage: number;
-  private nextItem: number;
-  private previousItem: number;
-  private nextItemValid: boolean;
-  private previousItemValid: boolean;
+  public nextItem: number;
+  public previousItem: number;
+  public nextItemValid: boolean;
+  public previousItemValid: boolean;
   
   constructor(private pageChangedNgModel: NgModel) {
     this.pageChangedNgModel.valueAccessor = this;
